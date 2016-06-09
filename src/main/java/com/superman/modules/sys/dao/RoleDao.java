@@ -15,7 +15,7 @@ import java.util.List;
  * @version 1.0
  */
 @MyBatisDao
-public interface RoleDao extends CrudDao<User> {
+public interface RoleDao extends CrudDao<Role> {
 
     public Role getByName(Role role);
 

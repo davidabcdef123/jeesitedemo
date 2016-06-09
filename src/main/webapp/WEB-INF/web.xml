@@ -11,7 +11,7 @@
     <param-value>classpath*:/spring-context*.xml</param-value>
   </context-param>
   <listener>
-    <listener-class>com.thinkgem.jeesite.modules.sys.listener.WebContextListener</listener-class>
+    <listener-class>com.superman.modules.sys.listener.WebContextListener</listener-class>
   </listener>
   <listener>
     <listener-class>org.springframework.web.context.request.RequestContextListener</listener-class>
@@ -121,7 +121,7 @@
   <!-- CKFinder -->
   <servlet>
     <servlet-name>CKFinderConnectorServlet</servlet-name>
-    <servlet-class>com.thinkgem.jeesite.common.web.CKFinderConnectorServlet</servlet-class>
+    <servlet-class>com.superman.common.web.CKFinderConnectorServlet</servlet-class>
     <init-param>
       <param-name>XMLConfig</param-name>
       <param-value>/WEB-INF/ckfinder.xml</param-value>
@@ -160,7 +160,7 @@
   <!-- Userfiles download -->
   <servlet>
     <servlet-name>UserfilesDownloadServlet</servlet-name>
-    <servlet-class>com.thinkgem.jeesite.common.servlet.UserfilesDownloadServlet</servlet-class>
+    <servlet-class>com.superman.common.servlet.UserfilesDownloadServlet</servlet-class>
   </servlet>
   <servlet-mapping>
     <servlet-name>UserfilesDownloadServlet</servlet-name>
@@ -170,7 +170,7 @@
   <!-- Validate code -->
   <servlet>
     <servlet-name>ValidateCodeServlet</servlet-name>
-    <servlet-class>com.thinkgem.jeesite.common.servlet.ValidateCodeServlet</servlet-class>
+    <servlet-class>com.superman.common.servlet.ValidateCodeServlet</servlet-class>
   </servlet>
   <servlet-mapping>
     <servlet-name>ValidateCodeServlet</servlet-name>

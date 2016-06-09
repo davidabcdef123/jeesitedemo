@@ -9,7 +9,9 @@ import com.google.common.collect.Lists;
 import com.superman.common.config.Global;
 import com.superman.common.persistence.DataEntity;
 import com.superman.common.supcan.annotation.treelist.cols.SupCol;
+import com.superman.common.utils.Collections3;
 import com.superman.common.utils.excel.annotation.ExcelField;
+import com.superman.common.utils.excel.filedtype.RoleListType;
 import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.Length;
 

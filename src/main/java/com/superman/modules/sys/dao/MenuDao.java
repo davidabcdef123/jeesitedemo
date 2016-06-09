@@ -2,6 +2,7 @@ package com.superman.modules.sys.dao;
 
 import com.superman.common.persistence.CrudDao;
 import com.superman.common.persistence.annotation.MyBatisDao;
+import com.superman.modules.sys.entity.Menu;
 
 import java.util.List;
 
@@ -13,7 +14,7 @@ import java.util.List;
  * @version 1.0
  */
 @MyBatisDao
-public interface MenuDao extends CrudDao {
+public interface MenuDao extends CrudDao<Menu> {
 
     public List<Menu> findByParentIdsLike(Menu menu);
 
