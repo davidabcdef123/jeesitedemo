@@ -3,6 +3,7 @@ package com.superman.modules.sys.dao;
 import com.superman.common.persistence.TreeDao;
 import com.superman.common.persistence.annotation.MyBatisDao;
 import com.superman.modules.sys.entity.Area;
+import org.springframework.stereotype.Repository;
 
 /**
  * Define Super.Sun.

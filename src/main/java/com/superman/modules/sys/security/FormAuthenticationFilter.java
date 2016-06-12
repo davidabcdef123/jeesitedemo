@@ -3,6 +3,7 @@ package com.superman.modules.sys.security;
 import com.superman.common.utils.StringUtils;
 import org.apache.shiro.authc.*;
 import org.apache.shiro.web.util.WebUtils;
+import org.springframework.stereotype.Service;
 
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
@@ -15,6 +16,7 @@ import javax.servlet.http.HttpServletRequest;
  * @author Super.Sun
  * @version 1.0
  */
+@Service
 public class FormAuthenticationFilter extends org.apache.shiro.web.filter.authc.FormAuthenticationFilter{
 
     public static final String DEFAULT_CAPTCHA_PARAM = "validateCode";
