@@ -12,7 +12,7 @@ import java.util.List;
 /**
  * Define Super.Sun.
  * <p>Created with IntelliJ IDEA on 2016/6/2.</p>
- *
+ * 机构Entity
  * @author Super.Sun
  * @version 1.0
  */
