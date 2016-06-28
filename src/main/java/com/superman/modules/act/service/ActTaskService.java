@@ -7,26 +7,40 @@ import com.superman.common.service.BaseService;
 import com.superman.common.utils.StringUtils;
 import com.superman.modules.act.dao.ActDao;
 import com.superman.modules.act.entity.Act;
+import com.superman.modules.act.utils.ActUtils;
+import com.superman.modules.act.utils.ProcessDefCache;
 import com.superman.modules.sys.entity.User;
 import com.superman.modules.sys.utils.UserUtils;
+import org.activiti.bpmn.model.BpmnModel;
 import org.activiti.engine.*;
+import org.activiti.engine.delegate.Expression;
 import org.activiti.engine.history.HistoricActivityInstance;
 import org.activiti.engine.history.HistoricProcessInstance;
+import org.activiti.engine.impl.RepositoryServiceImpl;
+import org.activiti.engine.impl.bpmn.behavior.UserTaskActivityBehavior;
+import org.activiti.engine.impl.bpmn.diagram.ProcessDiagramGenerator;
+import org.activiti.engine.impl.context.Context;
+import org.activiti.engine.impl.persistence.entity.ProcessDefinitionEntity;
+import org.activiti.engine.impl.pvm.delegate.ActivityBehavior;
+import org.activiti.engine.impl.pvm.process.ActivityImpl;
+import org.activiti.engine.impl.task.TaskDefinition;
 import org.activiti.engine.repository.Deployment;
 import org.activiti.engine.repository.ProcessDefinition;
 import org.activiti.engine.repository.ProcessDefinitionQuery;
+import org.activiti.engine.runtime.Execution;
 import org.activiti.engine.runtime.ProcessInstance;
 import org.activiti.engine.task.Comment;
 import org.activiti.engine.task.Task;
 import org.activiti.engine.task.TaskQuery;
 import org.activiti.spring.ProcessEngineFactoryBean;
+import org.apache.commons.beanutils.PropertyUtils;
+import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
+import java.io.InputStream;
+import java.util.*;
 
 /**
  * Define Super.Sun.
@@ -382,6 +396,274 @@ public class ActTaskService  extends BaseService {
     @Transactional(readOnly = false)
     public void complete(String taskId, String procInsId, String comment, Map<String, Object> vars){
         complete(taskId, procInsId, comment, "", vars);
+    }
+
+    /**
+     * 提交任务, 并保存意见
+     * @param taskId 任务ID
+     * @param procInsId 流程实例ID，如果为空，则不保存任务提交意见
+     * @param comment 任务提交意见的内容
+     * @param title			流程标题，显示在待办任务标题
+     * @param vars 任务变量
+     */
+    @Transactional(readOnly = false)
+    public void complete(String taskId, String procInsId, String comment, String title, Map<String, Object> vars){
+        // 添加意见
+        if (StringUtils.isNotBlank(procInsId) && StringUtils.isNotBlank(comment)){
+            taskService.addComment(taskId, procInsId, comment);
+        }
+
+        // 设置流程变量
+        if (vars == null){
+            vars = Maps.newHashMap();
+        }
+
+        // 设置流程标题
+        if (StringUtils.isNotBlank(title)){
+            vars.put("title", title);
+        }
+
+        // 提交任务
+        taskService.complete(taskId, vars);
+    }
+
+    /**
+     * 完成第一个任务
+     * @param procInsId
+     */
+    @Transactional(readOnly = false)
+    public void completeFirstTask(String procInsId){
+        completeFirstTask(procInsId, null, null, null);
+    }
+
+    /**
+     * 完成第一个任务
+     * @param procInsId
+     * @param comment
+     * @param title
+     * @param vars
+     */
+    @Transactional(readOnly = false)
+    public void completeFirstTask(String procInsId, String comment, String title, Map<String, Object> vars){
+        String userId = UserUtils.getUser().getLoginName();
+        Task task = taskService.createTaskQuery().taskAssignee(userId).processInstanceId(procInsId).active().singleResult();
+        if (task != null){
+            complete(task.getId(), procInsId, comment, title, vars);
+        }
+    }
+
+    //	/**
+//	 * 委派任务
+//	 * @param taskId 任务ID
+//	 * @param userId 被委派人
+//	 */
+//	public void delegateTask(String taskId, String userId){
+//		taskService.delegateTask(taskId, userId);
+//	}
+//
+//	/**
+//	 * 被委派人完成任务
+//	 * @param taskId 任务ID
+//	 */
+//	public void resolveTask(String taskId){
+//		taskService.resolveTask(taskId);
+//	}
+//
+//	/**
+//	 * 回退任务
+//	 * @param taskId
+//	 */
+//	public void backTask(String taskId){
+//		taskService.
+//	}
+
+    ////////////////////////////////////////////////////////////////////
+
+    /**
+     * 读取带跟踪的图片
+     * @param executionId	环节ID
+     * @return	封装了各种节点信息
+     */
+    public InputStream tracePhoto(String processDefinitionId, String executionId) {
+        // ProcessInstance processInstance = runtimeService.createProcessInstanceQuery().processInstanceId(executionId).singleResult();
+        BpmnModel bpmnModel = repositoryService.getBpmnModel(processDefinitionId);
+
+        List<String> activeActivityIds = Lists.newArrayList();
+        if (runtimeService.createExecutionQuery().executionId(executionId).count() > 0){
+            activeActivityIds = runtimeService.getActiveActivityIds(executionId);
+        }
+
+        // 不使用spring请使用下面的两行代码
+        // ProcessEngineImpl defaultProcessEngine = (ProcessEngineImpl)ProcessEngines.getDefaultProcessEngine();
+        // Context.setProcessEngineConfiguration(defaultProcessEngine.getProcessEngineConfiguration());
+
+        // 使用spring注入引擎请使用下面的这行代码
+        Context.setProcessEngineConfiguration(processEngine.getProcessEngineConfiguration());
+
+        return ProcessDiagramGenerator.generateDiagram(bpmnModel, "png", activeActivityIds);
+    }
+
+    /**
+     * 流程跟踪图信息
+     * @param processInstanceId		流程实例ID
+     * @return	封装了各种节点信息
+     */
+    public List<Map<String, Object>> traceProcess(String processInstanceId) throws Exception {
+        Execution execution = runtimeService.createExecutionQuery().executionId(processInstanceId).singleResult();//执行实例
+        Object property = PropertyUtils.getProperty(execution, "activityId");
+        String activityId = "";
+        if (property != null) {
+            activityId = property.toString();
+        }
+        ProcessInstance processInstance = runtimeService.createProcessInstanceQuery().processInstanceId(processInstanceId)
+                .singleResult();
+        ProcessDefinitionEntity processDefinition = (ProcessDefinitionEntity) ((RepositoryServiceImpl) repositoryService)
+                .getDeployedProcessDefinition(processInstance.getProcessDefinitionId());
+        List<ActivityImpl> activitiList = processDefinition.getActivities();//获得当前任务的所有节点
+
+        List<Map<String, Object>> activityInfos = new ArrayList<Map<String, Object>>();
+        for (ActivityImpl activity : activitiList) {
+
+            boolean currentActiviti = false;
+            String id = activity.getId();
+
+            // 当前节点
+            if (id.equals(activityId)) {
+                currentActiviti = true;
+            }
+
+            Map<String, Object> activityImageInfo = packageSingleActivitiInfo(activity, processInstance, currentActiviti);
+
+            activityInfos.add(activityImageInfo);
+        }
+
+        return activityInfos;
+    }
+
+    /**
+     * 封装输出信息，包括：当前节点的X、Y坐标、变量信息、任务类型、任务描述
+     * @param activity
+     * @param processInstance
+     * @param currentActiviti
+     * @return
+     */
+    private Map<String, Object> packageSingleActivitiInfo(ActivityImpl activity, ProcessInstance processInstance,
+                                                          boolean currentActiviti) throws Exception {
+        Map<String, Object> vars = new HashMap<String, Object>();
+        Map<String, Object> activityInfo = new HashMap<String, Object>();
+        activityInfo.put("currentActiviti", currentActiviti);
+        setPosition(activity, activityInfo);
+        setWidthAndHeight(activity, activityInfo);
+
+        Map<String, Object> properties = activity.getProperties();
+        vars.put("节点名称", properties.get("name"));
+        vars.put("任务类型", ActUtils.parseToZhType(properties.get("type").toString()));
+
+        ActivityBehavior activityBehavior = activity.getActivityBehavior();
+        logger.debug("activityBehavior={}", activityBehavior);
+        if (activityBehavior instanceof UserTaskActivityBehavior) {
+
+            Task currentTask = null;
+
+            // 当前节点的task
+            if (currentActiviti) {
+                currentTask = getCurrentTaskInfo(processInstance);
+            }
+
+            // 当前任务的分配角色
+            UserTaskActivityBehavior userTaskActivityBehavior = (UserTaskActivityBehavior) activityBehavior;
+            TaskDefinition taskDefinition = userTaskActivityBehavior.getTaskDefinition();
+            Set<Expression> candidateGroupIdExpressions = taskDefinition.getCandidateGroupIdExpressions();
+            if (!candidateGroupIdExpressions.isEmpty()) {
+
+                // 任务的处理角色
+                setTaskGroup(vars, candidateGroupIdExpressions);
+
+                // 当前处理人
+                if (currentTask != null) {
+                    setCurrentTaskAssignee(vars, currentTask);
+                }
+            }
+        }
+
+        vars.put("节点说明", properties.get("documentation"));
+
+        String description = activity.getProcessDefinition().getDescription();
+        vars.put("描述", description);
+
+        logger.debug("trace variables: {}", vars);
+        activityInfo.put("vars", vars);
+        return activityInfo;
+    }
+
+    /**
+     * 设置任务组
+     * @param vars
+     * @param candidateGroupIdExpressions
+     */
+    private void setTaskGroup(Map<String, Object> vars, Set<Expression> candidateGroupIdExpressions) {
+        String roles = "";
+        for (Expression expression : candidateGroupIdExpressions) {
+            String expressionText = expression.getExpressionText();
+            String roleName = identityService.createGroupQuery().groupId(expressionText).singleResult().getName();
+            roles += roleName;
+        }
+        vars.put("任务所属角色", roles);
+    }
+
+    /**
+     * 设置当前处理人信息
+     * @param vars
+     * @param currentTask
+     */
+    private void setCurrentTaskAssignee(Map<String, Object> vars, Task currentTask) {
+        String assignee = currentTask.getAssignee();
+        if (assignee != null) {
+            org.activiti.engine.identity.User assigneeUser = identityService.createUserQuery().userId(assignee).singleResult();
+            String userInfo = assigneeUser.getFirstName() + " " + assigneeUser.getLastName();
+            vars.put("当前处理人", userInfo);
+        }
+    }
+
+    /**
+     * 获取当前节点信息
+     * @param processInstance
+     * @return
+     */
+    private Task getCurrentTaskInfo(ProcessInstance processInstance) {
+        Task currentTask = null;
+        try {
+            String activitiId = (String) PropertyUtils.getProperty(processInstance, "activityId");
+            logger.debug("current activity id: {}", activitiId);
+
+            currentTask = taskService.createTaskQuery().processInstanceId(processInstance.getId()).taskDefinitionKey(activitiId)
+                    .singleResult();
+            logger.debug("current task for processInstance: {}", ToStringBuilder.reflectionToString(currentTask));
+
+        } catch (Exception e) {
+            logger.error("can not get property activityId from processInstance: {}", processInstance);
+        }
+        return currentTask;
+    }
+
+    /**
+     * 设置宽度、高度属性
+     * @param activity
+     * @param activityInfo
+     */
+    private void setWidthAndHeight(ActivityImpl activity, Map<String, Object> activityInfo) {
+        activityInfo.put("width", activity.getWidth());
+        activityInfo.put("height", activity.getHeight());
+    }
+
+    /**
+     * 设置坐标位置
+     * @param activity
+     * @param activityInfo
+     */
+    private void setPosition(ActivityImpl activity, Map<String, Object> activityInfo) {
+        activityInfo.put("x", activity.getX());
+        activityInfo.put("y", activity.getY());
     }
 
 }
