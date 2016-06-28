@@ -19,7 +19,7 @@ import com.superman.modules.sys.entity.Role;
 import com.superman.modules.sys.entity.User;
 import com.superman.modules.sys.security.SystemAuthorizingRealm;
 import com.superman.modules.sys.utils.LogUtils;
-import com.superman.modules.utils.UserUtils;
+import com.superman.modules.sys.utils.UserUtils;
 import org.activiti.engine.IdentityService;
 import org.activiti.engine.identity.Group;
 import org.apache.shiro.session.Session;

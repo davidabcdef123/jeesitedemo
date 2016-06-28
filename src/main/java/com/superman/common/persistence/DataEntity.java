@@ -5,7 +5,7 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.superman.common.utils.IdGen;
 import com.superman.modules.sys.entity.User;
-import com.superman.modules.utils.UserUtils;
+import com.superman.modules.sys.utils.UserUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.hibernate.validator.constraints.Length;
 

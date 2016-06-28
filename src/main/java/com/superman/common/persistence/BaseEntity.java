@@ -5,7 +5,7 @@ import com.google.common.collect.Maps;
 import com.superman.common.config.Global;
 import com.superman.common.supcan.annotation.treelist.cols.SupCol;
 import com.superman.modules.sys.entity.User;
-import com.superman.modules.utils.UserUtils;
+import com.superman.modules.sys.utils.UserUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.builder.ReflectionToStringBuilder;
 

@@ -7,7 +7,14 @@ import com.superman.common.persistence.Page;
 import com.superman.common.utils.CacheUtils;
 import com.superman.common.utils.SpringContextHolder;
 import com.superman.common.utils.StringUtils;
+import com.superman.modules.cms.entity.Article;
+import com.superman.modules.cms.entity.Category;
+import com.superman.modules.cms.entity.Link;
 import com.superman.modules.cms.entity.Site;
+import com.superman.modules.cms.service.ArticleService;
+import com.superman.modules.cms.service.CategoryService;
+import com.superman.modules.cms.service.LinkService;
+import com.superman.modules.cms.service.SiteService;
 import org.springframework.ui.Model;
 
 import javax.servlet.ServletContext;

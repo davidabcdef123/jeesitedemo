@@ -13,7 +13,7 @@ import com.superman.modules.sys.entity.User;
 import com.superman.modules.sys.service.SystemService;
 import com.superman.modules.sys.utils.LogUtils;
 import com.superman.modules.sys.web.LoginController;
-import com.superman.modules.utils.UserUtils;
+import com.superman.modules.sys.utils.UserUtils;
 import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.authc.AuthenticationInfo;
 import org.apache.shiro.authc.AuthenticationToken;

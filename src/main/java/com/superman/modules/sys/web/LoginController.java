@@ -11,7 +11,7 @@ import com.superman.common.utils.StringUtils;
 import com.superman.common.web.BaseController;
 import com.superman.modules.sys.security.FormAuthenticationFilter;
 import com.superman.modules.sys.security.SystemAuthorizingRealm;
-import com.superman.modules.utils.UserUtils;
+import com.superman.modules.sys.utils.UserUtils;
 import org.apache.shiro.authz.UnauthorizedException;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.apache.shiro.web.util.WebUtils;

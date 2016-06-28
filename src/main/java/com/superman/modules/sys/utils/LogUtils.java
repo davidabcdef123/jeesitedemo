@@ -12,7 +12,6 @@ import com.superman.modules.sys.dao.MenuDao;
 import com.superman.modules.sys.entity.Log;
 import com.superman.modules.sys.entity.Menu;
 import com.superman.modules.sys.entity.User;
-import com.superman.modules.utils.UserUtils;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.web.method.HandlerMethod;
 

@@ -4,7 +4,7 @@ import com.ckfinder.connector.ConnectorServlet;
 import com.superman.common.config.Global;
 import com.superman.common.utils.FileUtils;
 import com.superman.modules.sys.security.SystemAuthorizingRealm;
-import com.superman.modules.utils.UserUtils;
+import com.superman.modules.sys.utils.UserUtils;
 
 
 import javax.servlet.ServletException;

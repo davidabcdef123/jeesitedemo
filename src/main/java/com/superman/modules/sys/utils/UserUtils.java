@@ -1,4 +1,4 @@
-package com.superman.modules.utils;
+package com.superman.modules.sys.utils;
 
 import com.superman.common.service.BaseService;
 import com.superman.common.utils.CacheUtils;

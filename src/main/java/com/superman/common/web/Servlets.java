@@ -5,7 +5,7 @@ import com.superman.common.config.Global;
 import com.superman.common.utils.Encodes;
 import com.superman.common.utils.StringUtils;
 import com.superman.modules.sys.security.SystemAuthorizingRealm.Principal;
-import com.superman.modules.utils.UserUtils;
+import com.superman.modules.sys.utils.UserUtils;
 import org.apache.commons.lang3.Validate;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;

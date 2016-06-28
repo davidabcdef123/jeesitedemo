@@ -1,7 +1,7 @@
 package com.superman.modules.cms.entity;
 
 import com.superman.common.persistence.DataEntity;
-import com.superman.modules.utils.UserUtils;
+import com.superman.modules.sys.utils.UserUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.hibernate.validator.constraints.Length;
 
