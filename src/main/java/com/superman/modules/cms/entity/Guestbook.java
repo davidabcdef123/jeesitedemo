@@ -3,7 +3,10 @@ package com.superman.modules.cms.entity;
 import com.superman.common.persistence.DataEntity;
 import com.superman.common.utils.IdGen;
 import com.superman.modules.sys.entity.User;
+import org.hibernate.validator.constraints.Email;
+import org.hibernate.validator.constraints.Length;
 
+import javax.validation.constraints.NotNull;
 import java.util.Date;
 
 /**
@@ -41,5 +44,111 @@ public class Guestbook  extends DataEntity<Guestbook> {
     public void prePersist(){
         this.id = IdGen.uuid();
         this.createDate = new Date();
+    }
+
+    @Length(min=1, max=100)
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
+    }
+
+    @Length(min=1, max=2000)
+    public String getContent() {
+        return content;
+    }
+
+    public void setContent(String content) {
+        this.content = content;
+    }
+
+    @Length(min=1, max=100)
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    @Email
+    @Length(min=0, max=100)
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    @Length(min=0, max=100)
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
+
+    @Length(min=0, max=100)
+    public String getWorkunit() {
+        return workunit;
+    }
+
+    public void setWorkunit(String workunit) {
+        this.workunit = workunit;
+    }
+
+    @Length(min=1, max=100)
+    public String getIp() {
+        return ip;
+    }
+
+    public void setIp(String ip) {
+        this.ip = ip;
+    }
+
+    @NotNull
+    public Date getCreateDate() {
+        return createDate;
+    }
+
+    public void setCreateDate(Date createDate) {
+        this.createDate = createDate;
+    }
+
+    public User getReUser() {
+        return reUser;
+    }
+
+    public void setReUser(User reUser) {
+        this.reUser = reUser;
+    }
+
+    public String getReContent() {
+        return reContent;
+    }
+
+    public void setReContent(String reContent) {
+        this.reContent = reContent;
+    }
+
+    public Date getReDate() {
+        return reDate;
+    }
+
+    public void setReDate(Date reDate) {
+        this.reDate = reDate;
+    }
+
+    @Length(min=1, max=1)
+    public String getDelFlag() {
+        return delFlag;
+    }
+
+    public void setDelFlag(String delFlag) {
+        this.delFlag = delFlag;
     }
 }
