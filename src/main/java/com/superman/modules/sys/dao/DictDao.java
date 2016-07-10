@@ -1,6 +1,7 @@
 package com.superman.modules.sys.dao;
 
 import com.superman.common.persistence.CrudDao;
+import com.superman.common.persistence.annotation.MyBatisDao;
 import com.superman.modules.sys.entity.Dict;
 
 import java.util.List;
@@ -12,6 +13,7 @@ import java.util.List;
  * @author Super.Sun
  * @version 1.0
  */
+@MyBatisDao
 public interface DictDao  extends CrudDao<Dict> {
 
     public List<String> findTypeList(Dict dict);
