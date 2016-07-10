@@ -1,6 +1,8 @@
 package com.superman.modules.oa.dao;
 
+import com.superman.common.persistence.CrudDao;
 import com.superman.common.persistence.annotation.MyBatisDao;
+import com.superman.modules.oa.entity.OaNotifyRecord;
 import com.superman.modules.oa.entity.TestAudit;
 
 /**
@@ -11,7 +13,7 @@ import com.superman.modules.oa.entity.TestAudit;
  * @version 1.0
  */
 @MyBatisDao
-public interface TestAuditDao {
+public interface TestAuditDao  extends CrudDao<TestAudit> {
 
     public TestAudit getByProcInsId(String procInsId);
 

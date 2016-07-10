@@ -1,5 +1,6 @@
 package com.superman.modules.oa.dao;
 
+import com.superman.common.persistence.CrudDao;
 import com.superman.common.persistence.annotation.MyBatisDao;
 import com.superman.modules.oa.entity.OaNotifyRecord;
 
@@ -14,7 +15,7 @@ import java.util.List;
  */
 
 @MyBatisDao
-public interface OaNotifyRecordDao {
+public interface OaNotifyRecordDao extends CrudDao<OaNotifyRecord> {
 
     /**
      * 插入通知记录
