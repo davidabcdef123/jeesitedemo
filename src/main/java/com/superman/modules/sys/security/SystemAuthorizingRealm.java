@@ -28,6 +28,7 @@ import org.apache.shiro.subject.PrincipalCollection;
 import org.apache.shiro.util.ByteSource;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.context.annotation.DependsOn;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.PostConstruct;
@@ -43,7 +44,7 @@ import java.util.List;
  * @version 1.0
  */
 @Service
-//@DependsOn({"userDao","roleDao","menuDao"})
+@DependsOn({"userDao","roleDao","menuDao"})
 public class SystemAuthorizingRealm extends AuthorizingRealm {
 
     private Logger logger = LoggerFactory.getLogger(getClass());
@@ -113,9 +114,9 @@ public class SystemAuthorizingRealm extends AuthorizingRealm {
             SimpleAuthorizationInfo info = new SimpleAuthorizationInfo();
             List<Menu> list = UserUtils.getMenuList();
             for (Menu menu : list){
-                if (StringUtils.isNotBlank(menu.getPermission())){
+                if (org.apache.commons.lang3.StringUtils.isNotBlank(menu.getPermission())){
                     // 添加基于Permission的权限信息
-                    for (String permission : StringUtils.split(menu.getPermission(),",")){
+                    for (String permission : org.apache.commons.lang3.StringUtils.split(menu.getPermission(),",")){
                         info.addStringPermission(permission);
                     }
                 }

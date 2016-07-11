@@ -8,7 +8,6 @@ package com.superman.modules.sys.security;
  * @version 1.0
  */
 public class UsernamePasswordToken extends org.apache.shiro.authc.UsernamePasswordToken{
-
     private static final long serialVersionUID = 1L;
 
     private String captcha;

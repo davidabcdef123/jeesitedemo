@@ -100,4 +100,5 @@ public class FormAuthenticationFilter extends org.apache.shiro.web.filter.authc.
         request.setAttribute(getMessageParam(), message);
         return true;
     }
+
 }

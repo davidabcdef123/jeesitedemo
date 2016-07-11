@@ -3,9 +3,8 @@
          xmlns="http://java.sun.com/xml/ns/j2ee"
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee http://java.sun.com/xml/ns/j2ee/web-app_2_4.xsd">
-  <display-name>JeeSite</display-name>
+  <display-name>JeeSitedemo</display-name>
 
-  <!-- Context ConfigLocation -->
   <context-param>
     <param-name>contextConfigLocation</param-name>
     <param-value>classpath*:/spring-context*.xml</param-value>
@@ -96,7 +95,7 @@
     <servlet-class>org.restlet.ext.servlet.ServerServlet</servlet-class>
     <init-param>
       <param-name>org.restlet.application</param-name>
-      <param-value>com.thinkgem.jeesite.modules.act.rest.ActRestApplication</param-value>
+      <param-value>com.superman.modules.act.rest.ActRestApplication</param-value>
     </init-param>
   </servlet>
   <servlet-mapping>
@@ -132,7 +131,7 @@
     </init-param>
     <init-param>
       <param-name>configuration</param-name>
-      <param-value>com.thinkgem.jeesite.common.web.CKFinderConfig</param-value>
+      <param-value>com.superman.common.web.CKFinderConfig</param-value>
     </init-param>
     <load-on-startup>1</load-on-startup>
   </servlet>
