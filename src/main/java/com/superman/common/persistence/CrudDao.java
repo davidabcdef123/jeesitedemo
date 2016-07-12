@@ -5,11 +5,12 @@ import java.util.List;
 /**
  * Define Super.Sun.
  * <p>Created with IntelliJ IDEA on 2016/6/2.</p>
- *
+ * DAO支持类实现
  * @author Super.Sun
  * @version 1.0
  */
 public interface CrudDao<T> extends BaseDao {
+
 
     /**
      * 获取单条数据
@@ -76,4 +77,5 @@ public interface CrudDao<T> extends BaseDao {
      * @return
      */
     public int delete(T entity);
+
 }

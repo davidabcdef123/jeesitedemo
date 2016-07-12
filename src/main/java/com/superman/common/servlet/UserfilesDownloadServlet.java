@@ -22,6 +22,7 @@ import java.io.*;
  */
 public class UserfilesDownloadServlet extends HttpServlet {
 
+
     private static final long serialVersionUID = 1L;
     private Logger logger = LoggerFactory.getLogger(getClass());
 
@@ -29,7 +30,7 @@ public class UserfilesDownloadServlet extends HttpServlet {
             throws ServletException, IOException {
         String filepath = req.getRequestURI();
         int index = filepath.indexOf(Global.USERFILES_BASE_URL);
-        if (index >= 0) {
+        if(index >= 0) {
             filepath = filepath.substring(index + Global.USERFILES_BASE_URL.length());
         }
         try {
@@ -47,7 +48,6 @@ public class UserfilesDownloadServlet extends HttpServlet {
             req.getRequestDispatcher("/WEB-INF/views/error/404.jsp").forward(req, resp);
         }
     }
-
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp)

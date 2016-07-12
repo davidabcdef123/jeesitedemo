@@ -24,7 +24,6 @@ public abstract class BaseService {
 
     /**
      * 日志对象
-     * getClass  v extend BaseService;
      */
     protected Logger logger = LoggerFactory.getLogger(getClass());
 
@@ -190,4 +189,5 @@ public abstract class BaseService {
         entity.getSqlMap().put(sqlMapKey, sqlString.toString());
 
     }
+
 }

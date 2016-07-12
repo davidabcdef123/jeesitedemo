@@ -1,6 +1,7 @@
 package com.superman.modules.act.service;
 
 import com.superman.common.persistence.Page;
+import com.superman.common.service.BaseService;
 import org.activiti.bpmn.converter.BpmnXMLConverter;
 import org.activiti.bpmn.model.BpmnModel;
 import org.activiti.editor.constants.ModelDataJsonConstants;
@@ -36,7 +37,7 @@ import java.util.List;
  */
 @Service
 @Transactional(readOnly = true)
-public class ActModelService {
+public class ActModelService extends BaseService {
     @Autowired
     private RepositoryService repositoryService;
 

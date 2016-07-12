@@ -32,6 +32,7 @@ public class CacheSessionDAO  extends EnterpriseCacheSessionDAO implements Sessi
     public CacheSessionDAO() {
         super();
     }
+
     @Override
     protected void doUpdate(Session session) {
         if (session == null || session.getId() == null) {
@@ -167,4 +168,5 @@ public class CacheSessionDAO  extends EnterpriseCacheSessionDAO implements Sessi
         }
         return sessions;
     }
+
 }

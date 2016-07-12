@@ -10,7 +10,7 @@ import javax.validation.constraints.NotNull;
 /**
  * Define Super.Sun.
  * <p>Created with IntelliJ IDEA on 2016/6/2.</p>
- *
+ *数据Entity类
  * @author Super.Sun
  * @version 1.0
  */
@@ -78,4 +78,5 @@ public abstract class TreeEntity<T> extends DataEntity<T> {
         }
         return StringUtils.isNotBlank(id) ? id : "0";
     }
+
 }

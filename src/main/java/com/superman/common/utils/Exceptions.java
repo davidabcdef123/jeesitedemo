@@ -7,7 +7,7 @@ import java.io.StringWriter;
 /**
  * Define Super.Sun.
  * <p>Created with IntelliJ IDEA on 2016/6/2.</p>
- *
+ * 关于异常的工具类.
  * @author Super.Sun
  * @version 1.0
  */

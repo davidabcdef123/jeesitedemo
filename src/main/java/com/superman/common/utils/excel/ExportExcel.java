@@ -395,7 +395,7 @@ public class ExportExcel {
      * 输出数据流
      * @param os 输出数据流
      */
-    public ExportExcel write(OutputStream os) throws IOException {
+    public ExportExcel write(OutputStream os) throws IOException{
         wb.write(os);
         return this;
     }
@@ -407,7 +407,7 @@ public class ExportExcel {
     public ExportExcel write(HttpServletResponse response, String fileName) throws IOException{
         response.reset();
         response.setContentType("application/octet-stream; charset=utf-8");
-        response.setHeader("Content-Disposition", "attachment; filename="+ Encodes.urlEncode(fileName));
+        response.setHeader("Content-Disposition", "attachment; filename="+Encodes.urlEncode(fileName));
         write(response.getOutputStream());
         return this;
     }

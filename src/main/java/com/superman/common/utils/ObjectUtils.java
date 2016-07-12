@@ -11,7 +11,7 @@ import java.lang.reflect.Method;
 /**
  * Define Super.Sun.
  * <p>Created with IntelliJ IDEA on 2016/6/13.</p>
- *
+ *对象操作工具类, 继承org.apache.commons.lang3.ObjectUtils类
  * @author Super.Sun
  * @version 1.0
  */

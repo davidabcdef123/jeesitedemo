@@ -3,6 +3,7 @@ package com.superman.common.persistence;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.google.common.collect.Maps;
 import com.superman.common.config.Global;
+import com.superman.common.supcan.annotation.treelist.SupTreeList;
 import com.superman.common.supcan.annotation.treelist.cols.SupCol;
 import com.superman.modules.sys.entity.User;
 import com.superman.modules.sys.utils.UserUtils;
@@ -16,13 +17,12 @@ import java.util.Map;
 /**
  * Define Super.Sun.
  * <p>Created with IntelliJ IDEA on 2016/6/2.</p>
- *
+ *Entity支持类
  * @author Super.Sun
  * @version 1.0
  */
-
+@SupTreeList
 public abstract class BaseEntity<T> implements Serializable {
-
     private static final long serialVersionUID = 1L;
 
     /**

@@ -14,30 +14,30 @@ import java.util.Date;
 /**
  * Define Super.Sun.
  * <p>Created with IntelliJ IDEA on 2016/6/2.</p>
- *
+ *数据Entity类
  * @author Super.Sun
  * @version 1.0
  */
 public abstract class DataEntity<T> extends BaseEntity<T> {
 
 	private static final long serialVersionUID = 1L;
-	
+
 	protected String remarks;	// 备注
 	protected User createBy;	// 创建者
 	protected Date createDate;	// 创建日期
 	protected User updateBy;	// 更新者
 	protected Date updateDate;	// 更新日期
 	protected String delFlag; 	// 删除标记（0：正常；1：删除；2：审核）
-	
+
 	public DataEntity() {
 		super();
 		this.delFlag = DEL_FLAG_NORMAL;
 	}
-	
+
 	public DataEntity(String id) {
 		super(id);
 	}
-	
+
 	/**
 	 * 插入之前执行方法，需要手动调用
 	 */
@@ -55,7 +55,7 @@ public abstract class DataEntity<T> extends BaseEntity<T> {
 		this.updateDate = new Date();
 		this.createDate = this.updateDate;
 	}
-	
+
 	/**
 	 * 更新之前执行方法，需要手动调用
 	 */
@@ -67,7 +67,7 @@ public abstract class DataEntity<T> extends BaseEntity<T> {
 		}
 		this.updateDate = new Date();
 	}
-	
+
 	@Length(min=0, max=255)
 	public String getRemarks() {
 		return remarks;
@@ -76,7 +76,7 @@ public abstract class DataEntity<T> extends BaseEntity<T> {
 	public void setRemarks(String remarks) {
 		this.remarks = remarks;
 	}
-	
+
 	@JsonIgnore
 	public User getCreateBy() {
 		return createBy;

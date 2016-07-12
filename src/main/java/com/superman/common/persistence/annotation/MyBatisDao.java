@@ -1,5 +1,9 @@
 package com.superman.common.persistence.annotation;
 
+import org.springframework.stereotype.Component;
+
+import java.lang.annotation.*;
+
 /**
  * Define Super.Sun.
  * <p>Created with IntelliJ IDEA on 2016/6/2.</p>
@@ -7,6 +11,10 @@ package com.superman.common.persistence.annotation;
  * @author Super.Sun
  * @version 1.0
  */
+@Retention(RetentionPolicy.RUNTIME)
+@Target(ElementType.TYPE)
+@Documented
+@Component
 public @interface MyBatisDao {
 
     String value() default "";

@@ -22,7 +22,6 @@ import java.util.Properties;
  * @version 1.0
  */
 public abstract class BaseInterceptor implements Interceptor, Serializable {
-
     private static final long serialVersionUID = 1L;
 
     protected static final String PAGE = "page";
@@ -35,7 +34,7 @@ public abstract class BaseInterceptor implements Interceptor, Serializable {
 
     protected Dialect DIALECT;
 
-    //    /**
+//    /**
 //     * 拦截的ID，在mapper中的id，可以匹配正则
 //     */
 //    protected String _SQL_PATTERN = "";
@@ -53,14 +52,12 @@ public abstract class BaseInterceptor implements Interceptor, Serializable {
             if (parameterObject instanceof Page) {
                 return (Page<Object>) parameterObject;
             } else {
-                return (Page<Object>) Reflections.getFieldValue(parameterObject, PAGE);
+                return (Page<Object>)Reflections.getFieldValue(parameterObject, PAGE);
             }
         }catch (Exception e) {
             return null;
         }
     }
-
-
 
     /**
      * 设置属性，支持自定义方言类和制定数据库的方式

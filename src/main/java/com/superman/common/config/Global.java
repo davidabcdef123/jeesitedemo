@@ -67,8 +67,7 @@ public class Global {
 
     /**
      * 获取配置
-     * @see ↓↓↓↓↓
-     * ${fns:getConfig('adminPath')}
+     * @see ${fns:getConfig('adminPath')}
      */
     public static String getConfig(String key) {
         String value = map.get(key);
@@ -118,8 +117,7 @@ public class Global {
 
     /**
      * 页面获取常量
-     * @see ↓↓↓↓↓
-     * ${fns:getConst('YES')}
+     * @see ${fns:getConst('YES')}
      */
     public static Object getConst(String field) {
         try {
@@ -130,6 +128,10 @@ public class Global {
         return null;
     }
 
+    /**
+     * 获取上传文件的根目录
+     * @return
+     */
     public static String getUserfilesBaseDir() {
         String dir = getConfig("userfiles.basedir");
         if (StringUtils.isBlank(dir)){
@@ -176,14 +178,5 @@ public class Global {
             e.printStackTrace();
         }
         return projectPath;
-    }
-
-    public static void main(String[] args) {
-        try {
-            String dir = ServletContextFactory.getServletContext().getRealPath("/");
-            System.out.println(dir);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
     }
 }
