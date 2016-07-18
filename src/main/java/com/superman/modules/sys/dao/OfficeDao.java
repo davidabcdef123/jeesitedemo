@@ -7,7 +7,7 @@ import com.superman.modules.sys.entity.Office;
 /**
  * Define Super.Sun.
  * <p>Created with IntelliJ IDEA on 2016/6/2.</p>
- *
+ * 机构DAO接口
  * @author Super.Sun
  * @version 1.0
  */

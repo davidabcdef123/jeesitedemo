@@ -1,24 +1,4 @@
 <?xml version="1.0" encoding="UTF-8"?>
-
-<!--
-  Licensed to the Apache Software Foundation (ASF) under one
-  or more contributor license agreements.  See the NOTICE file
-  distributed with this work for additional information
-  regarding copyright ownership.  The ASF licenses this file
-  to you under the Apache License, Version 2.0 (the
-  "License"); you may not use this file except in compliance
-  with the License.  You may obtain a copy of the License at
-
-   http://www.apache.org/licenses/LICENSE-2.0
-
-  Unless required by applicable law or agreed to in writing,
-  software distributed under the License is distributed on an
-  "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
-  KIND, either express or implied.  See the License for the
-  specific language governing permissions and limitations
-  under the License.
--->
-<!-- $Id: pom.xml 642118 2008-03-28 08:04:16Z reinhard $ -->
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 
   <modelVersion>4.0.0</modelVersion>
@@ -984,8 +964,9 @@
     </plugins>
   </build>
 
-  <!--<profiles>
-    &lt;!&ndash; 初始化数据库 &ndash;&gt;
+
+  <profiles>
+    <!-- 初始化数据库 -->
     <profile>
       <id>init-db</id>
       <dependencies>
@@ -1009,14 +990,14 @@
             <configuration>
               <target>
 
-                &lt;!&ndash; mysql &ndash;&gt;
+                <!-- mysql -->
                 <property name="dbunit.datatype" value="org.dbunit.ext.mysql.MySqlDataTypeFactory" />
 
-                &lt;!&ndash; mssql
-                <property name="dbunit.datatype" value="org.dbunit.ext.mssql.MsSqlDataTypeFactory" /> &ndash;&gt;
+                <!-- mssql
+                <property name="dbunit.datatype" value="org.dbunit.ext.mssql.MsSqlDataTypeFactory" /> -->
 
-                &lt;!&ndash; oracle
-                <property name="dbunit.datatype" value="org.dbunit.ext.oracle.Oracle10DataTypeFactory" /> &ndash;&gt;
+                <!-- oracle
+                <property name="dbunit.datatype" value="org.dbunit.ext.oracle.Oracle10DataTypeFactory" /> -->
 
                 <property file="src/main/resources/jeesite.properties" />
                 <sql driver="${jdbc.driver}" url="${jdbc.url}" userid="${jdbc.username}" password="${jdbc.password}"
@@ -1038,13 +1019,13 @@
 
                 <taskdef name="dbunit" classname="org.dbunit.ant.DbUnitTask" classpathref="maven.test.classpath" />
 
-                &lt;!&ndash; mysql、mssql &ndash;&gt;
+                <!-- mysql、mssql -->
                 <dbunit driver="${jdbc.driver}" url="${jdbc.url}" userid="${jdbc.username}"
                         password="${jdbc.password}">
 
-                  &lt;!&ndash; oracle
+                  <!-- oracle
                   <dbunit driver="${jdbc.driver}" url="${jdbc.url}" userid="${jdbc.username}"
-                      password="${jdbc.password}" schema="${jdbc.username}" > &ndash;&gt;
+                      password="${jdbc.password}" schema="${jdbc.username}" > -->
 
                   <dbconfig>
                     <property name="datatypeFactory" value="${dbunit.datatype}" />
@@ -1061,7 +1042,7 @@
         </plugins>
       </build>
     </profile>
-  </profiles>-->
+  </profiles>
 
   <!-- 开发者信息 -->
   <developers>

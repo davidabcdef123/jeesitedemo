@@ -10,6 +10,7 @@ import com.superman.modules.gen.entity.GenTable;
 import com.superman.modules.gen.entity.GenTableColumn;
 import com.superman.modules.gen.util.GenUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
@@ -21,6 +22,8 @@ import java.util.List;
  * @author Super.Sun
  * @version 1.0
  */
+@Service
+@Transactional(readOnly = true)
 public class GenTableService extends BaseService {
 
     @Autowired

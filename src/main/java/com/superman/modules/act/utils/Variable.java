@@ -79,4 +79,8 @@ public class Variable {
         }
         return map;
     }
+
+    public Map<String, Object> getMap() {
+        return map;
+    }
 }

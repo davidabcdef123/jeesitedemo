@@ -36,7 +36,7 @@ import java.util.List;
 /**
  * Define Super.Sun.
  * <p>Created with IntelliJ IDEA on 2016/6/2.</p>
- *
+ * 系统管理，安全相关实体的管理类,包括用户、角色、菜单.
  * @author Super.Sun
  * @version 1.0
  */

@@ -40,11 +40,12 @@ import java.util.List;
  * Define Super.Sun.
  * <p>Created with IntelliJ IDEA on 2016/6/2.</p>
  *系统安全认证实现类
+ * @DependsOn({"userDao","roleDao","menuDao"})在这3个dao之前实例化
  * @author Super.Sun
  * @version 1.0
  */
 @Service
-@DependsOn({"userDao","roleDao","menuDao"})
+//@DependsOn({"userDao","roleDao","menuDao"})
 public class SystemAuthorizingRealm extends AuthorizingRealm {
 
     private Logger logger = LoggerFactory.getLogger(getClass());

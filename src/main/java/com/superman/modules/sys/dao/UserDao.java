@@ -9,7 +9,7 @@ import java.util.List;
 /**
  * Define Super.Sun.
  * <p>Created with IntelliJ IDEA on 2016/6/2.</p>
- *
+ * 用户DAO接口
  * @author Super.Sun
  * @version 1.0
  */
